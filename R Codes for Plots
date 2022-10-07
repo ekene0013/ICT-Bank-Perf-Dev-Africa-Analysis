@@ -1,0 +1,51 @@
+# Reading datafile
+setwd ("C:/Users/steph/Desktop/PUBLICATIONS WIP/ICT & Bank Performance/05302020/R Codes")
+ictdata <- read.csv("ictdata.csv")
+View (ictdata)
+
+## Loading libraries
+library (plm)               # For panel data
+library (tidyverse)         # For data management
+library (readr)             # For reading csv file
+library (gplots)            # For paneldata plots
+library (foreign)           # 
+
+## Declaring panel data
+##agdata <- as.data.frame (agdata, index = c("State","Year"))
+
+pd.ictdata <- pdata.frame (ictdata, index = c("country","year")) # check later
+
+
+
+## Unobserved ROA Heterogeneity across time 
+
+par(mfrow=c(3,2))
+plotmeans (ROA ~ year, main = "Heterogeneity of ROA across time", ylab = "ROA", xlab = "Year", data=pd.ictdata)
+plotmeans (ROE ~ year, main = "Heterogeneity of ROE across time",  ylab = "ROE", xlab = "Year", data=pd.ictdata)
+plotmeans (Net.interest.margin ~ year, main = "Heterogeneity of NIM across time",  ylab = "NIM", xlab = "Year", data=pd.ictdata)
+plotmeans (ATM.adult ~ year, main = "Heterogeneity of ATMs per 1000 adults across time", ylab = "ATM per 100,000 adults", xlab = "Year", data=pd.ictdata)
+plotmeans (ATM.km ~ year, main = "Heterogeneity of ATMS per 1000kmsqr across time", ylab = "ATM per 1000kmsqr adults", xlab = "Year", data=pd.ictdata)
+plotmeans (MM.transactions.adult ~ year, main = "Heterogeneity of Mobile Money Transactions across time",  ylab = "Mobile Money Transactions", xlab = "Year", data=pd.ictdata)
+
+
+dev.off()
+
+
+## Scatter and Fit graph
+
+par(mfrow=c(3,3))
+ggplot (pd.ictdata, aes (x = ATM.adult, y = ROA, color = Levels)) + geom_point() + theme_bw() + theme (legend.position = "bottom") + labs (title = "ROA vs ATMs per 100,000 adults", subtitle = "Classification of countries by income Level")
+ggplot (pd.ictdata, aes (x = ATM.km, y = ROA, color = Levels)) + geom_point() + theme_bw() + theme (legend.position = "bottom") + labs (title = "ROA vs ATMs per 1000 kmsqr", subtitle = "Classification of countries by income level")
+ggplot (pd.ictdata, aes (x = MM.transactions.adult, y = ROA, color = Levels)) + geom_point() + theme_bw() + theme (legend.position = "bottom") + labs (title = "ROA vs Mobile Money Transactions", subtitle = "Classification of countries by income level")
+ggplot (pd.ictdata, aes (x = ATM.adult, y = ROE, color = Levels)) + geom_point()+ theme_bw() + theme (legend.position = "bottom") + labs (title = "ROE vs ATMs per 100,000 adults", subtitle = "Classification of countries by income level")
+ggplot (pd.ictdata, aes (x = ATM.km, y = ROE, color = Levels)) + geom_point() + theme (legend.position = "bottom") + labs (title = "ROE vs ATMs per 1000 kmsqr", subtitle = "Classification of countries by income level")
+ggplot (pd.ictdata, aes (x = MM.transactions.adult, y = ROE, color = Levels)) + geom_point() + theme_bw() + theme (legend.position = "bottom") + labs (title = "ROE vs Mobile Money Transactions", subtitle = "Classification of countries by income level")
+ggplot (pd.ictdata, aes (x = ATM.adult, y = Net.interest.margin, color = Levels)) + geom_point()+ theme_bw() + theme (legend.position = "bottom") + labs (title = "NIM vs ATMs per 100,000 adults", subtitle = "Classification of countries by income level")
+ggplot (pd.ictdata, aes (x = ATM.km, y = Net.interest.margin, color = Levels)) + geom_point()+ theme_bw() + theme (legend.position = "bottom") + labs (title = "NIM vs ATMs per 1000 kmsqr", subtitle = "Classification of Countries by income level")
+ggplot (pd.ictdata, aes (x = MM.transactions.adult, y = Net.interest.margin, color = Levels)) + geom_point() + theme_bw() + theme (legend.position = "bottom") + labs (title = "NIM vs Mobile Money Transactions", subtitle = "Classification of countries by income levels")
+
+
+dev.off ()
+
+##ggplot (pd.ictdata, aes_strings (x = "ATM.adult", y = "ROA")) + geom_point (color = Income.Class) + geom_smooth()
+dev.off()
