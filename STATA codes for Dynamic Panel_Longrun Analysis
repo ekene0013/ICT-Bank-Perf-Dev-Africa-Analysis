@@ -1,0 +1,105 @@
+use "C:\Users\NONNY\Documents\ICT & Banking\Remodel.dta" 
+
+xtabond2 ROA l.ROA NoofATM Costratio Liquidassetratio Inflation GDP, gmm(l.ROA l(0/1).Costratio l(0/1).Liquidassetratio, collapse lag(2 4)) iv( l.Capitalratio l2.logGDP ,eq(diff)) twostep robust orthog
+
+nlcom (_b[NoofATM]) / (1-_b[L1.ROA])
+
+nlcom (_b[ Costratio ]) / (1-_b[L1.ROA])
+
+nlcom (_b[ Liquidassetratio ]) / (1-_b[L1.ROA])
+
+xtabond2 ROA l.ROA MMtransactionsadult Costratio Liquidassetratio Inflation GDP, gmm(l.ROA l(0/1).Liquidassetratio, collapse lag(. 4)) iv( l.Capitalratio l.Costratio l.Inflation l2.logGDP, eq(diff)) twostep robust orthog
+
+nlcom (_b[ MMtransactionsadult ]) / (1-_b[L1.ROA])
+
+nlcom (_b[ Liquidassetratio ]) / (1-_b[L1.ROA])
+
+xtabond2 Netinterestmargin l.Netinterestmargin MMtransactionsadult Costratio Liquidassetratio Inflation GDP, gmm(l2.Netinterestmargin l(0/1).MMtransactionsadult l(0/1).Costratio l(0/1).Liquidassetratio, collapse lag(. 2)) iv( Capitalratio Costratio l.RegisteredMMadult l.Inflation l.GDP) twostep orthog robust
+
+nlcom (_b[ MMtransactionsadult ]) / (1-_b[L1.Netinterestmargin])
+
+nlcom (_b[ Costratio ]) / (1-_b[L1.Netinterestmargin])
+
+nlcom (_b[ Inflation ]) / (1-_b[L1.Netinterestmargin])
+
+nlcom (_b[ GDP ]) / (1-_b[L1.Netinterestmargin])
+
+xtabond2 Netinterestmargin l.Netinterestmargin NoofATM Costratio Liquidassetratio Inflation GDP, gmm(l.Netinterestmargin l(0/1).NoofATM l(0/1).Liquidassetratio, collapse lag(. 2)) iv( l.Capitalratio l.logNoofATM l.Inflation l2.logGDP ,eq(diff)) twostep robust orthog
+
+nlcom (_b[ NoofATM ]) / (1-_b[L1.Netinterestmargin])
+
+nlcom (_b[ Costratio ]) / (1-_b[L1.Netinterestmargin])
+
+xtabond2 Netinterestmargin l.Netinterestmargin ATMkm Costratio Liquidassetratio Inflation GDP, gmm(l.Netinterestmargin l(0/1).Liquidassetratio, collapse lag(2 3)) iv( l.Capitalratio l.Costratio l.Inflation l.GDP) twostep orthog robust
+
+nlcom (_b[ ATMkm ]) / (1-_b[L1.Netinterestmargin])
+
+nlcom (_b[ Costratio ]) / (1-_b[L1.Netinterestmargin])
+
+nlcom (_b[ Inflation ]) / (1-_b[L1.Netinterestmargin])
+
+nlcom (_b[ GDP ]) / (1-_b[L1.Netinterestmargin])
+
+xtabond2 Netinterestmargin l.Netinterestmargin ATMadult Costratio Liquidassetratio Inflation GDP, gmm(l.Netinterestmargin l(0/1).ATMadult l(0/1).Costratio l(0/1).Liquidassetratio, collapse lag(2 3)) iv ( l.Capitalratio l.Costratio l.NoofATM l.Inflation l2.GDP,eq(diff)) twostep orthog robust
+
+nlcom (_b[ ATMadult ]) / (1-_b[L1.Netinterestmargin])
+
+nlcom (_b[ Costratio ]) / (1-_b[L1.Netinterestmargin])
+
+nlcom (_b[ GDP ]) / (1-_b[L1.Netinterestmargin])
+
+xtabond2 ROA l.ROA ATMkm Costratio Liquidassetratio Inflation GDP, gmm(l2.ROA l(0/1).Liquidassetratio, collapse lag(2 4)) iv( l.Capitalratio l.Costratio l.Inflation l2.logGDP ,eq(diff)) twostep robust orthog
+
+nlcom (_b[ ATMkm ]) / (1-_b[L1.ROA])
+
+nlcom (_b[ Costratio ]) / (1-_b[L1.ROA])
+
+nlcom (_b[ Liquidassetratio ]) / (1-_b[L1.ROA])
+
+nlcom (_b[ Inflation ]) / (1-_b[L1.ROA])
+
+xtabond2 ROA l.ROA ATMadult Costratio Liquidassetratio Inflation GDP, gmm(l2.ROA l(0/1).Liquidassetratio, collapse lag(2 4)) iv( l.Capitalratio l.Costratio l.Inflation l2.logGDP ,eq(diff)) twostep robust orthog
+
+nlcom (_b[ ATMadult ]) / (1-_b[L1.ROA])
+
+nlcom (_b[ Costratio ]) / (1-_b[L1.ROA])
+
+nlcom (_b[ Liquidassetratio ]) / (1-_b[L1.ROA])
+
+nlcom (_b[ Inflation ]) / (1-_b[L1.ROA])
+
+xtabond2 ROE l.ROE MMtransactionsadult Costratio Liquidassetratio Inflation GDP, gmm(l.ROE l(0/1).Liquidassetratio, collapse lag(. 4)) iv( l.Capitalratio l.Costratio l.Inflation l2.logGDP ,eq(diff)) twostep robust orthog
+
+nlcom (_b[ MMtransactionsadult ]) / (1-_b[L1.ROE])
+
+nlcom (_b[ Liquidassetratio ]) / (1-_b[L1.ROE])
+
+nlcom (_b[ Inflation ]) / (1-_b[L1.ROE])
+
+xtabond2 ROE l.ROE NoofATM Costratio Liquidassetratio Inflation GDP, gmm(l2.ROE l(0/1).NoofATM l(0/1).Liquidassetratio, collapse lag(2 4)) iv( Capitalratio Costratio l.logNoofATM l.Inflation l2.logGDP ,eq(diff)) twostep robust orthog
+
+nlcom (_b[ NoofATM ]) / (1-_b[L1.ROE])
+
+nlcom (_b[ Costratio ]) / (1-_b[L1.ROE])
+
+nlcom (_b[ Liquidassetratio ]) / (1-_b[L1.ROE])
+
+nlcom (_b[ GDP ]) / (1-_b[L1.ROE])
+
+xtabond2 ROE l.ROE ATMkm Costratio Liquidassetratio Inflation GDP, gmm(l2.ROE l(0/1).ATMkm l(0/1).Liquidassetratio, collapse lag(2 2)) iv( l.Capitalratio l.Costratio logNoofATM l.Inflation l2.logGDP ,eq(diff)) twostep robust orthog
+
+nlcom (_b[ ATMkm ]) / (1-_b[L1.ROE])
+
+nlcom (_b[ Costratio ]) / (1-_b[L1.ROE])
+
+nlcom (_b[ Liquidassetratio ]) / (1-_b[L1.ROE])
+
+xtabond2 ROE l.ROE ATMadult Costratio Liquidassetratio Inflation GDP, gmm(l.ROE l(0/1).ATMadult l(0/1).Liquidassetratio, collapse lag(2 2)) iv( l.Capitalratio l.Costratio logNoofATM l.Inflation l2.logGDP ,eq(diff)) twostep robust orthog
+
+xtabond2 ROE l.ROE ATMadult Costratio Liquidassetratio Inflation GDP, gmm(l2.ROE l(0/1).ATMadult l(0/1).Liquidassetratio, collapse lag(2 2)) iv( l.Capitalratio l.Costratio logNoofATM l.Inflation l2.logGDP ,eq(diff)) twostep robust orthog
+
+nlcom (_b[ ATMadult ]) / (1-_b[L1.ROE])
+
+nlcom (_b[ Costratio ]) / (1-_b[L1.ROE])
+
+nlcom (_b[ Liquidassetratio ]) / (1-_b[L1.ROE])
